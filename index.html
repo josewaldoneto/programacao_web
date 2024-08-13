@@ -9,13 +9,15 @@
 <body>
     <h1 id="titulo">Revisão de HTML/CSS</h1>
 
-    <div class="inputUser">
-        <input type="text" placeholder="Nome">
-        <input type="number" placeholder="Idade">
-        <input type="email" placeholder="Email">
-        <button> OK</button>
+    <div class="inputUsuario">
+        <input id="Nome" type="text" placeholder="Nome">
+        <input id="Idade" type="number" placeholder="Idade">
+        <input id="Cpf" type="text" placeholder="CPF">
+        <button onclick="submeter()"> OK</button>
     </div>
 
     <footer class="rodape"><b>2024</b></footer>
+    
+    <script src="script.js"></script> <!-- Manter script no final da página para não mudar o html -->
 </body>
 </html>
