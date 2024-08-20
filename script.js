@@ -39,7 +39,9 @@ function validaCPF(cpf) {
         return false;
     }
 
-    if(!cpfMath(cpf)) {
+    // Validar a matemática do CPF
+    // Replace está sendo usado para remover pontos e hífen
+    if(!cpfMath(cpf.replace(/[\.-]/g,""))) {
         alert("CPF inválido");
         return false;
     }
@@ -48,14 +50,15 @@ function validaCPF(cpf) {
 }
 
 function cpfMath(cpf) {
-    let soma = 0;
+    // Verificação do 1º dígito verificador
+    let soma1 = 0;
     for (let i = 1; i <= 9; i++) {
-        soma = soma + (cpf.charAt(i-1) * (10 - (i-1)));
+        soma1 = soma1 + (cpf.charAt(i-1) * (10 - (i-1)));
     }
 
-    let resto = ( soma % 11 )
+    let resto1 = ( soma1 % 11 )
 
-    let digitoVerificador1 = 11 - resto;
+    let digitoVerificador1 = 11 - resto1;
 
     if(digitoVerificador1 >= 10) {
         if (cpf[9] != 0) {
@@ -67,5 +70,27 @@ function cpfMath(cpf) {
         }
     }
 
+    // Verificação do 2º dígito verificador
+    let soma2 = 0;
+    for (let j = 1; j <= 8; j++) {
+        soma2 = soma2 + (cpf.charAt(j) * (10 - (j-1)));
+    }
+
+    soma2 += digitoVerificador1 * 2
+
+    let resto2 = ( soma2 % 11 )
+    
+    let digitoVerificador2 = 11 - resto2
+
+    if(digitoVerificador2 >= 10) {
+        if (cpf[10] != 0) {
+            return false;
+        }
+    } else if(digitoVerificador2 < 10) {
+        if(digitoVerificador2 != cpf[10]) {
+            return false;
+        }
+    }
+    
     return true;
 }
