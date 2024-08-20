@@ -72,11 +72,9 @@ function cpfMath(cpf) {
 
     // Verificação do 2º dígito verificador
     let soma2 = 0;
-    for (let j = 1; j <= 8; j++) {
-        soma2 = soma2 + (cpf.charAt(j) * (10 - (j-1)));
+    for (let j = 1; j <= 10; j++) {
+        soma2 = soma2 + (cpf.charAt(j-1) * (11 - (j-1)));
     }
-
-    soma2 += digitoVerificador1 * 2
 
     let resto2 = ( soma2 % 11 )
     
