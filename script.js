@@ -39,5 +39,33 @@ function validaCPF(cpf) {
         return false;
     }
 
+    if(!cpfMath(cpf)) {
+        alert("CPF inválido");
+        return false;
+    }
+
+    return true;
+}
+
+function cpfMath(cpf) {
+    let soma = 0;
+    for (let i = 1; i <= 9; i++) {
+        soma = soma + (cpf.charAt(i-1) * (10 - (i-1)));
+    }
+
+    let resto = ( soma % 11 )
+
+    let digitoVerificador1 = 11 - resto;
+
+    if(digitoVerificador1 >= 10) {
+        if (cpf[9] != 0) {
+            return false;
+        }
+    } else if(digitoVerificador1 < 10) {
+        if(digitoVerificador1 != cpf[9]) {
+            return false;
+        }
+    }
+
     return true;
 }
